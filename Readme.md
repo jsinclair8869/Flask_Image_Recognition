@@ -79,3 +79,47 @@ Keep the terminal open while using the application. Press `Ctrl+C` in the termin
 - Run commands from the project folder so the application can find `digit_model.h5`.
 - Do not commit the `.venv` folder to Git.
 - TensorFlow may display a missing CUDA library warning on computers without a configured NVIDIA GPU. The application can still run using the CPU.
+## Testing and Continuous Integration
+
+### Running Checks Locally
+
+With the virtual environment active, install the development tools:
+
+```powershell
+python -m pip install pylint pre-commit
+python -m pre_commit install
+```
+
+Run code quality checks and all tests:
+
+```powershell
+python -m pylint app.py model.py
+python -m pre_commit run --all-files
+python -m pytest -v
+```
+
+To run only the additional assignment tests:
+
+```powershell
+python -m pytest test_assignment2.py -v
+```
+
+### Additional Test Coverage
+
+The `test_assignment2.py` file adds 10 tests covering:
+
+- Home page access and unexpected query parameters.
+- Valid image uploads and displaying a prediction of zero.
+- Missing uploads and empty filenames/content.
+- Text uploads and invalid content disguised as a JPEG.
+- Standard RGB image preprocessing and a one-pixel image.
+
+Prediction responses are mocked in the upload success tests to make the expected results predictable. Image preprocessing is tested directly.
+
+### GitHub Actions
+
+The workflow in `.github/workflows/ci.yml` automatically checks pushes and pull requests targeting `main`.
+
+It checks out the repository, sets up Python 3.10, installs dependencies, runs Pylint, and runs the complete pytest suite.
+
+Workflow results and detailed logs are available in the repository's **Actions** tab.
