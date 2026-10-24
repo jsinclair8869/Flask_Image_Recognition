@@ -193,3 +193,6 @@ def test_one_pixel_rgb_image_preprocessing():
     # Resizing a single-colour image should preserve its colour throughout.
     expected_colour = np.array([1.0, 128 / 255.0, 0.0])
     assert np.allclose(processed_image, expected_colour, atol=1e-6)
+def test_ci_failure_demonstration():
+    """Deliberately fail to verify that CI detects a failing test."""
+    assert False, "Intentional failure to demonstrate CI detection"
