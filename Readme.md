@@ -24,36 +24,58 @@ https://user-images.githubusercontent.com/72191416/201943098-c8f5fd8b-ec7d-4e5d-
 
 - Bootstrap
 
-# Get Started
+## Setup
 
-Clone the repository in your project directory.
+Install Git and Python 3.10 (64-bit) before starting.
 
-```commandline
-git clone https://github.com/Sachin-crypto/Flask_Image_Recognition.git
-```
-OR
+### 1. Clone the repository
 
-Download as **[ZIP](https://github.com/Sachin-crypto/Flask_Image_Recognition/archive/refs/heads/main.zip)** file and extract it in your project directory.
+Open PowerShell in the folder where you want to save the project:
 
-# Install Dependencies
-
-Install the dependencies from the **requirements.txt** file.
-
-```commandline
-pip install -r requirements.txt
+```powershell
+git clone https://github.com/jsinclair8869/Flask_Image_Recognition.git
+cd Flask_Image_Recognition
 ```
 
-# Run
+### 2. Create and activate a virtual environment
 
-**cd** into the current directory and run the script.
-
-```commandline
-flask --app app.py run --debug
+```powershell
+py -3.10 -m venv .venv
+.\.venv\Scripts\Activate.ps1
 ```
-Click [here](https://geekpython.in/run-flask-app-from-the-command-line-in-windows) to get the detailed guide on running the Flask app from the command line.
 
-# Test
+The terminal should show `(.venv)` when the environment is active.
 
-- Choose an image from the test images folder.
-- You will see a preview of the uploaded image.
-- Click on **Submit** button and see the magic.
+### 3. Install dependencies
+
+```powershell
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+The project uses TensorFlow 2.10.0. The requirements also pin Werkzeug to 2.3.8 to maintain compatibility with Flask 2.2.1.
+
+## Running the Application
+
+From the project folder, with the virtual environment active, run:
+
+```powershell
+python -m flask --app app run
+```
+
+Open http://127.0.0.1:5000 in your browser.
+
+Keep the terminal open while using the application. Press `Ctrl+C` in the terminal to stop it.
+
+### Making a Prediction
+
+1. Choose a hand-sign digit image from the `test_images` folder.
+2. Check the image preview.
+3. Click **Submit**.
+4. View the predicted digit on the results page.
+
+### Setup Notes
+
+- Run commands from the project folder so the application can find `digit_model.h5`.
+- Do not commit the `.venv` folder to Git.
+- TensorFlow may display a missing CUDA library warning on computers without a configured NVIDIA GPU. The application can still run using the CPU.
